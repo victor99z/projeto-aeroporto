@@ -1,6 +1,10 @@
 version: '3'
 
 services:
+  spring:
+    image: aeroporto:0.0.1-SNAPSHOT
+    ports:
+    - 8080:8080
   postgres:
     image: postgres
     environment:
@@ -8,19 +12,23 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./.PostgreSQL:/var/lib/postgresql/data
-      - ./docs/tabelas.sql:/docker-entrypoint-initdb.d/tabelas.sql
+      - ./.postgres:/var/lib/postgresql/data
     networks:
       - postgres-network
     container_name: postgresql-container
+    stdin_open: true
+    tty: true
       
   pgadmin:
     image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
       PGADMIN_DEFAULT_PASSWORD: "admin"
+      PGADMIN_LISTEN_PORT: 5052
     ports:
-      - "8888:80"
+      - 5052:5052
+    volumes:
+    - ./.pgadmin:/var/lib/pgadmin
     depends_on:
       - postgres
     networks:
