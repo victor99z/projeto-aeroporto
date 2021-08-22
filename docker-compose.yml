@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "root"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.PostgreSQL:/var/lib/postgresql/data
+      - ./docs/tabelas.sql:/docker-entrypoint-initdb.d/tabelas.sql
+    networks:
+      - postgres-network
+    container_name: postgresql-container
+      
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    ports:
+      - "8888:80"
+    volumes:
+      - ./.pgadmin:/var/lib/pgadmin
+      - ./.pgsql_dump:/backup
+    depends_on:
+      - postgres
+    networks:
+      - postgres-network
+    container_name: pgadmin-container
+  
+  mongodb:
+    image : mongo
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    volumes:
+    - ./.mongodb:/data/db
+    ports:
+    - 27017:27017
+    restart: unless-stopped
+
+networks: 
+  postgres-network:
+    driver: bridge
