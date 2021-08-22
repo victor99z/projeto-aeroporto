@@ -1,52 +1,48 @@
 version: '3'
-
 services:
   spring:
-    image: aeroporto:0.0.1-SNAPSHOT
+    image: 'aeroporto:0.0.1-SNAPSHOT'
     ports:
-    - 8080:8080
+      - '8080:8080'
   postgres:
     image: postgres
     environment:
-      POSTGRES_PASSWORD: "root"
+      POSTGRES_PASSWORD: root
     ports:
-      - "5432:5432"
+      - '5432:5432'
     volumes:
-      - ./.postgres:/var/lib/postgresql/data
+      - './.postgres:/var/lib/postgresql/data'
     networks:
       - postgres-network
     container_name: postgresql-container
     stdin_open: true
     tty: true
-      
   pgadmin:
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
-      PGADMIN_DEFAULT_PASSWORD: "admin"
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
       PGADMIN_LISTEN_PORT: 5052
     ports:
-      - 5052:5052
+      - '5052:5052'
     volumes:
-    - ./.pgadmin:/var/lib/pgadmin
+      - '${PATH_PGADMIN}:/var/lib/pgadmin'
     depends_on:
       - postgres
     networks:
       - postgres-network
     container_name: pgadmin-container
-  
   mongodb:
-    image : mongo
+    image: mongo
     container_name: mongodb
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=root
     volumes:
-    - ./.mongodb:/data/db
+      - './.mongodb:/data/db'
     ports:
-    - 27017:27017
+      - '27017:27017'
     restart: unless-stopped
-
-networks: 
+networks:
   postgres-network:
     driver: bridge

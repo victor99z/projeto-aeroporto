@@ -31,10 +31,11 @@ build/
 
 ### VS Code ###
 .vscode/
-
+.env
 ### Persistencia do DB
 .PostgreSQL
 .pgadmin
 .pgsql_dump
+.postgres/
 .mongodb
 

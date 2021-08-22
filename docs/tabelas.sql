@@ -17,19 +17,17 @@ create table empregado(
 );
 
 create table controlador(
-	idControlador serial not null primary key,
+	idEmpregado serialprimary key,
 	data_exame_recente date,
-	idEmpregado int not null,
 	FOREIGN KEY(idEmpregado) REFERENCES empregado(idEmpregado)
 );
 
 create table tecnico(
-	idTecnico serial not null primary key,
+	idEmpregado serial primary key,
 	num_matricula int,
 	endereco varchar(200),
 	num_telefone varchar(50),
 	salario numeric,
-	idEmpregado int not null,
 	FOREIGN KEY(idEmpregado) REFERENCES empregado(idEmpregado)
 );
 
