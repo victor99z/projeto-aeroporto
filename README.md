@@ -6,10 +6,12 @@ os bancos de dados **PostgreSQL** e **MongoDb**
 
 - JDK 11 (>=)
 
-
 ```bash
-./mvnw spring-boot:run
+$ docker-compose up -d
+$ ./mvnw spring-boot:run
 ```
+_Devido a problemas no spring-live-reload deixarei apenas os bancos de dados em
+containers por enquanto_
 
 ## Usage
 
