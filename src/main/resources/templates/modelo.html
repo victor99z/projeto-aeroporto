@@ -25,22 +25,22 @@
   </nav>
 
   <div class="container d-flex justify-content-center" style="width: 40em; margin-top: 5em;">
-    <form action="#" th:action="@{/aviao/modelo/cadastro}" method="post" th:object="${modeloAviaoForm}">
+    <form action="#" th:action="@{/aviao/modelo/cadastro}" method="post" th:object="${modeloAviao}">
       <h1>Cadastro de modelos</h1>
       <br>
       <div class="form-group">
         <label>Código modelo</label>
-        <input type="text" class="form-control" placeholder="name@example.com">
+        <input type="text" class="form-control" th:field="*{codmodelo}" required>
       </div>
       <br>
       <div class="form-group">
-        <label>Email address</label>
-        <input type="text" class="form-control" placeholder="name@example.com">
+        <label>Capacidade</label>
+        <input type="text" class="form-control" th:field="*{capacidade}" required>
       </div>
       <br>
       <div class="form-group">
-        <label>Email address</label>
-        <input type="text" class="form-control" placeholder="name@example.com">
+        <label>Peso</label>
+        <input type="text" class="form-control" th:field="*{peso}" required>
       </div>
       <br>
       <div class="form-group">

@@ -1,25 +1,28 @@
 package com.udesc.aeroporto.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "modeloaviao")
 public class ModeloAviao{
+    @NotNull
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "serial")
-    private int codmodelo;
+    @OneToOne(mappedBy = "aviao", cascade = CascadeType.ALL)
+    private String codmodelo;
+    @NotNull
     @Column(name = "capacidade")
     private int capacidade;
+    @NotNull
     @Column(name = "peso")
     private Double peso;
 
-    public int getCodmodelo() {
+    public String getCodmodelo() {
         return codmodelo;
     }
 
-    public ModeloAviao setCodmodelo(int codModelo) {
-        this.codmodelo = codModelo;
+    public ModeloAviao setCodmodelo(String codmodelo) {
+        this.codmodelo = codmodelo;
         return this;
     }
 
@@ -44,7 +47,7 @@ public class ModeloAviao{
     @Override
     public String toString() {
         return "ModeloAviao{" +
-                "codModelo=" + codmodelo +
+                "codmodelo='" + codmodelo + '\'' +
                 ", capacidade=" + capacidade +
                 ", peso=" + peso +
                 '}';

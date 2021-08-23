@@ -1,12 +1,12 @@
 create table modeloAviao(
-	codModelo serial not null primary key,
+	codModelo varchar(100) not null primary key,
 	capacidade int,
 	peso numeric
 );
 
 create table aviao(
 	num_registro serial not null primary key,
-	codModelo int not null,
+	codModelo varchar(100) not null,
 	foreign key(codModelo) REFERENCES modeloAviao(codModelo)
 );
 
@@ -33,7 +33,7 @@ create table tecnico(
 create table especialidade(
 	idEspecialidade serial primary key not null,
 	idEmpregado int,
-	codModelo int,
+	codModelo varchar(100),
 	FOREIGN KEY(idEmpregado) REFERENCES tecnico(idEmpregado),
 	FOREIGN KEY(codModelo) REFERENCES modeloAviao(codModelo)
 );
@@ -67,11 +67,12 @@ $$
 declare 
 	vcapacidade int default 0;
 	vpeso numeric default 0.0;
+	vcodmodelo varchar(100)[] := '{''DC-10'',''A320'',''Boing 767'',''Boing 747'',''A350 XWB'',''A380''}';
 begin
-	for cont in 1..10000 loop
+	for cont in 1..6 loop
 	  vcapacidade := random()*(1000-1)+1;
 	  vpeso := random()*(100-18)+18;
-      insert into modeloaviao (capacidade, peso) values (vcapacidade,vpeso); 
+      insert into modeloaviao (codmodelo,capacidade, peso) values (vcodmodelo[cont],vcapacidade,vpeso); 
    end loop;
 end;
 $$

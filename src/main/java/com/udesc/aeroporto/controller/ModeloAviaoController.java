@@ -1,6 +1,6 @@
 package com.udesc.aeroporto.controller;
 
-import com.udesc.aeroporto.formHandle.ModeloAviaoForm;
+import com.udesc.aeroporto.model.ModeloAviao;
 import com.udesc.aeroporto.repository.ModeloAviaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,21 +19,21 @@ public class ModeloAviaoController {
 
     @GetMapping("/modelo")
     public String getAll(Model model){
-
-        model.addAttribute("modeloAviaoForm", new ModeloAviaoForm());
+        model.addAttribute("modeloAviao", new ModeloAviao());
         model.addAttribute("modelos", modeloAviaoRepository.findAll());
         return "modelo";
     }
 
     @PostMapping("/modelo/cadastro")
-    public String cadastro(@ModelAttribute("modeloAviaoForm") ModeloAviaoForm modeloAviaoForm){
-        System.out.println(modeloAviaoForm.toString());
-        return "modelo";
+    public String cadastro(@ModelAttribute("modeloAviao") ModeloAviao modeloAviao){
+        modeloAviaoRepository.save(modeloAviao);
+        return "redirect:/aviao/modelo";
     }
 
     @GetMapping("/modelo/delete")
-    public String deleteModelo(@RequestParam(name = "codmodelo", required = true) Integer codmodelo){
-        modeloAviaoRepository.deleteById(codmodelo);
+    public String deleteModelo(@RequestParam(name = "codmodelo", required = true) String codmodelo){
+        System.out.println(codmodelo);
+        modeloAviaoRepository.deleteByCodmodelo(codmodelo);
         return "redirect:/aviao/modelo";
     }
 
