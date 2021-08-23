@@ -4,6 +4,11 @@ services:
     image: 'aeroporto:0.0.1-SNAPSHOT'
     ports:
       - '8080:8080'
+    depends_on:
+      - postgres
+      - mongodb
+    networks:
+      - postgres-network
   postgres:
     image: postgres
     environment:

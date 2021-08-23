@@ -1,14 +1,13 @@
 create table modeloAviao(
-	idModeloAviao serial not null primary key,
+	codModelo serial not null primary key,
 	capacidade int,
 	peso numeric
 );
 
 create table aviao(
-	idAviao serial not null primary key,
-	numRegistro int,
-	idModeloAviao int not null,
-	foreign key(idModeloAviao) REFERENCES modeloAviao(idModeloAviao)
+	num_registro serial not null primary key,
+	codModelo int not null,
+	foreign key(codModelo) REFERENCES modeloAviao(codModelo)
 );
 
 create table empregado(
@@ -17,7 +16,7 @@ create table empregado(
 );
 
 create table controlador(
-	idEmpregado serialprimary key,
+	idEmpregado serial primary key,
 	data_exame_recente date,
 	FOREIGN KEY(idEmpregado) REFERENCES empregado(idEmpregado)
 );
@@ -33,16 +32,10 @@ create table tecnico(
 
 create table especialidade(
 	idEspecialidade serial primary key not null,
-	idTecnico int,
-	idAviao int,
-	FOREIGN KEY(idTecnico) REFERENCES tecnico(idTecnico),
-	FOREIGN KEY(idAviao) REFERENCES aviao(idAviao)
-);
-
-create table consultas(
-	idConsultas serial not null primary key,
-	idControlador int not null,
-	FOREIGN KEY(idControlador) REFERENCES controlador(idControlador)
+	idEmpregado int,
+	codModelo int,
+	FOREIGN KEY(idEmpregado) REFERENCES tecnico(idEmpregado),
+	FOREIGN KEY(codModelo) REFERENCES modeloAviao(codModelo)
 );
 
 create table sindicato(
@@ -51,20 +44,36 @@ create table sindicato(
 	FOREIGN KEY(idEmpregado) REFERENCES empregado(idEmpregado)
 );
 
-create table testes(
-	idTest serial not null primary key,
+create table teste(
+	nroa serial not null primary key,
 	nome varchar(200),
 	pontuacao_max numeric,
-	idAviao int not null,
-	FOREIGN KEY(idAviao) REFERENCES aviao(idAviao)
+	num_registro int not null,
+	FOREIGN KEY(num_registro) REFERENCES aviao(num_registro)
 );
 
-create table teste_realizado(
+create table testeRealizado(
 	idTesteRealizado serial not null primary key,
 	data_realizacao date,
 	hrs_gastas time,
-	idTecnico int,
-	idTest int,
-	FOREIGN KEY(idTest) REFERENCES testes(idTest),
-	FOREIGN KEY(idTecnico) REFERENCES tecnico(idTecnico)
+	idEmpregado int,
+	nroa int,
+	FOREIGN KEY(nroa) REFERENCES teste(nroa),
+	FOREIGN KEY(idEmpregado) REFERENCES tecnico(idEmpregado)
 );
+
+create or replace function geraDadosModeloAviao() returns void as
+$$
+declare 
+	vcapacidade int default 0;
+	vpeso numeric default 0.0;
+begin
+	for cont in 1..10000 loop
+	  vcapacidade := random()*(1000-1)+1;
+	  vpeso := random()*(100-18)+18;
+      insert into modeloaviao (capacidade, peso) values (vcapacidade,vpeso); 
+   end loop;
+end;
+$$
+language plpgsql
+

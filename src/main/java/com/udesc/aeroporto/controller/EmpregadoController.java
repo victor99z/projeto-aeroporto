@@ -1,4 +1,4 @@
-package com.udesc.aeroporto.Controller;
+package com.udesc.aeroporto.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +12,6 @@ public class EmpregadoController {
     @GetMapping("/empregado")
     public String fechou(@RequestParam(value = "name", defaultValue = "World") String name, Model model) {
         model.addAttribute("appName", name);
-        return "home";
+        return "index";
     }
 }
