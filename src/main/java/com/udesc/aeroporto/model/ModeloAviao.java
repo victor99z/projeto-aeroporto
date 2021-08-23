@@ -1,13 +1,13 @@
 package com.udesc.aeroporto.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "modeloaviao")
 public class ModeloAviao{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
     private int codmodelo;
     @Column(name = "capacidade")
     private int capacidade;
