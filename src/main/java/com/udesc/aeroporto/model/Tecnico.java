@@ -1,8 +1,10 @@
 package com.udesc.aeroporto.entity;
 
+import com.udesc.aeroporto.model.Empregado;
+
 import java.math.BigDecimal;
 
-public class Tecnico extends Empregado{
+public class Tecnico extends Empregado {
     private int idTecnico;
     private int numMatricula;
     private String endereco;
