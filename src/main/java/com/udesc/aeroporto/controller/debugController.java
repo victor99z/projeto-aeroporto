@@ -9,6 +9,6 @@ public class debugController {
 
     @GetMapping("/debug")
     public String retorna(){
-        return "teste";
+        return "mongo breanch";
     }
 }

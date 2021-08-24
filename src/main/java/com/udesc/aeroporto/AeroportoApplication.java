@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 		"com.udesc.aeroporto.repository"
 })
 @EnableMongoRepositories(basePackages = {
-		"com.udesc.aeroporto.repositoryMongo"
+		"com.udesc.aeroporto.repository"
 })
 public class AeroportoApplication {
 

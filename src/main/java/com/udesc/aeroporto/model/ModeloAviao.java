@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "modeloaviao")
-@Document(collection = "modeloaviao")
 public class ModeloAviao{
     @NotNull
     @Id

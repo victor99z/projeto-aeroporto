@@ -33,7 +33,6 @@ public class ModeloAviaoController {
 
     @GetMapping("/modelo/delete")
     public String deleteModelo(@RequestParam(name = "codmodelo", required = true) String codmodelo){
-        System.out.println(codmodelo);
         modeloAviaoRepository.deleteByCodmodelo(codmodelo);
         return "redirect:/aviao/modelo";
     }
