@@ -34,7 +34,6 @@ public class AviaoController {
 
     @PostMapping("/aviao/cadastro")
     public String cadastroAviao(@ModelAttribute("aviao") Aviao aviao){
-        System.out.println(aviao);
         aviaoRepository.save(aviao);
         return "redirect:/aviao";
     }

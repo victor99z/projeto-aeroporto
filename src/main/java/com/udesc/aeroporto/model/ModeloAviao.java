@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 public class ModeloAviao{
     @NotNull
     @Id
-    @OneToOne(mappedBy = "aviao", cascade = CascadeType.ALL)
     private String codmodelo;
     @NotNull
     @Column(name = "capacidade")

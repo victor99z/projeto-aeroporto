@@ -1,7 +1,5 @@
 package com.udesc.aeroporto.model;
 
-import org.hibernate.annotations.GeneratorType;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 

@@ -7,7 +7,7 @@ create table modeloAviao(
 create table aviao(
 	num_registro serial not null primary key,
 	codModelo varchar(100) not null,
-	foreign key(codModelo) REFERENCES modeloAviao(codModelo)
+	foreign key(codModelo) REFERENCES modeloAviao(codModelo) ON DELETE CASCADE
 );
 
 create table empregado(
@@ -18,7 +18,7 @@ create table empregado(
 create table controlador(
 	idEmpregado serial primary key,
 	data_exame_recente date,
-	FOREIGN KEY(idEmpregado) REFERENCES empregado(idEmpregado)
+	FOREIGN KEY(idEmpregado) REFERENCES empregado(idEmpregado) ON DELETE CASCADE
 );
 
 create table tecnico(
@@ -27,7 +27,7 @@ create table tecnico(
 	endereco varchar(200),
 	num_telefone varchar(50),
 	salario numeric,
-	FOREIGN KEY(idEmpregado) REFERENCES empregado(idEmpregado)
+	FOREIGN KEY(idEmpregado) REFERENCES empregado(idEmpregado) ON DELETE CASCADE
 );
 
 create table especialidade(
@@ -41,7 +41,7 @@ create table especialidade(
 create table sindicato(
 	nroaMembro serial not null primary key,
 	idEmpregado int not null,
-	FOREIGN KEY(idEmpregado) REFERENCES empregado(idEmpregado)
+	FOREIGN KEY(idEmpregado) REFERENCES empregado(idEmpregado) ON DELETE CASCADE
 );
 
 create table teste(
