@@ -24,7 +24,76 @@
         </div>
     </div>
 </nav>
-
+<div class="container d-flex justify-content-center" style="width: 40em; margin-top: 5em;">
+    <form action="#" th:action="@{/teste/realizados/cadastro}" method="post" th:object="${testesrealizado}">
+        <h1>Cadastro de testes realizados</h1>
+        <br>
+        <label>Tecnico</label>
+        <div class="form-group">
+            <select class="form-select" aria-label="Default select example" th:field="*{idempregado}">
+                <option th:each="tecnico : ${tecnicos}" th:text="${tecnico.nome}" th:value="${tecnico.idempregado}"></option>
+            </select>
+        </div>
+        <br>
+        <label>Teste</label>
+        <div class="form-group">
+            <select class="form-select" aria-label="Default select example" th:field="*{idtest}">
+                <option th:each="teste : ${testes}" th:text="${teste.nome}" th:value="${teste.nroa}"></option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label>Pontuação obtida</label>
+            <input type="text"  class="form-control" th:field="*{pontuacao_obtida}" required>
+        </div>
+        <br>
+        <div class="form-group">
+            <label>Horas gastas</label>
+            <input type="text"  class="form-control" th:field="*{hrs_gastas}" required>
+        </div>
+        <br>
+        <div class="form-group">
+            <label>Data</label>
+            <input type="date" class="form-control" th:field="*{data}" required>
+        </div>
+        <br>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar</button>
+        </div>
+    </form>
+</div>
+<!-- Fim Formulario -->
+<div class="container d-flex justify-content-center" >
+    <table class="table table-bordered table-striped table-hover" style="width: 40em; margin-top: 5em; margin-bottom: 5em">
+        <thead>
+        <tr>
+            <th scope="col" colspan="6" style="text-align: center">Lista de testes realizados</th>
+        </tr>
+        <tr>
+            <th scope="col" style="text-align: center">id</th>
+            <th scope="col" style="text-align: center">id test</th>
+            <th scope="col" style="text-align: center">id empregado</th>
+            <th scope="col" style="text-align: center">data</th>
+            <th scope="col" style="text-align: center">tempo gasto</th>
+            <th scope="col" style="text-align: center">pontuação</th>
+            <th scope="col" style="text-align: center">Excluir</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="teste : ${testesrealizados}">
+            <th scope="row" style="text-align: center" th:text="${teste.idtesterealizado}"></th>
+            <th scope="row" style="text-align: center" th:text="${teste.idtest}"></th>
+            <th scope="row" style="text-align: center" th:text="${teste.idempregado}"></th>
+            <th scope="row" style="text-align: center" th:text="${teste.data}"></th>
+            <th scope="row" style="text-align: center" th:text="${teste.hrs_gastas}"></th>
+            <th scope="row" style="text-align: center" th:text="${teste.pontuacao_obtida}"></th>
+            <th scope="col" style="text-align: center">
+                <a type="submit" class="btn btn-danger" style="width: 100%;" th:href="@{'/teste/realizados/idtesterealizado?=' + ${teste.idtesterealizado}}">Excluir</a>
+            </th>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>

@@ -1,5 +1,7 @@
 package com.udesc.aeroporto.model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 

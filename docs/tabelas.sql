@@ -12,18 +12,20 @@ create table aviao(
 
 create table empregado(
 	idEmpregado serial not null primary key,
-	nome_empregado varchar(200)
+	
 );
 
 create table controlador(
 	idEmpregado serial primary key,
 	data_exame_recente date,
+	nome_empregado varchar(200)
 	FOREIGN KEY(idEmpregado) REFERENCES empregado(idEmpregado) ON DELETE CASCADE
 );
 
 create table tecnico(
 	idEmpregado serial primary key,
 	num_matricula int,
+	nome_empregado varchar(200)
 	endereco varchar(200),
 	num_telefone varchar(50),
 	salario numeric,
@@ -58,6 +60,7 @@ create table testeRealizado(
 	hrs_gastas time,
 	idEmpregado int,
 	nroa int,
+	pontuacao_obtida numeric,
 	FOREIGN KEY(nroa) REFERENCES teste(nroa),
 	FOREIGN KEY(idEmpregado) REFERENCES tecnico(idEmpregado)
 );

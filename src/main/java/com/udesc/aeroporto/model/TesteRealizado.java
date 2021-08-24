@@ -1,13 +1,16 @@
 package com.udesc.aeroporto.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalTime;
 
 @Entity
-@Table(name = "testesrealizados")
-public class TestesRealizados {
+@Table(name = "testerealizado")
+public class TesteRealizado {
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,19 +18,20 @@ public class TestesRealizados {
     @NotNull
     @Column(name = "data_realizacao")
     private Date data;
-    @NotNull
-    private Time hrs_gastas;
+    private LocalTime hrs_gastas;
     @NotNull
     private int idempregado;
     @NotNull
     @Column(name="nroa")
-    private int idaviao;
+    private int idtest;
+    @NotNull
+    private Double pontuacao_obtida;
 
     public int getIdtesterealizado() {
         return idtesterealizado;
     }
 
-    public TestesRealizados setIdtesterealizado(int idtesterealizado) {
+    public TesteRealizado setIdtesterealizado(int idtesterealizado) {
         this.idtesterealizado = idtesterealizado;
         return this;
     }
@@ -36,16 +40,16 @@ public class TestesRealizados {
         return data;
     }
 
-    public TestesRealizados setData(Date data) {
+    public TesteRealizado setData(Date data) {
         this.data = data;
         return this;
     }
 
-    public Time getHrs_gastas() {
+    public LocalTime getHrs_gastas() {
         return hrs_gastas;
     }
 
-    public TestesRealizados setHrs_gastas(Time hrs_gastas) {
+    public TesteRealizado setHrs_gastas(LocalTime hrs_gastas) {
         this.hrs_gastas = hrs_gastas;
         return this;
     }
@@ -54,28 +58,38 @@ public class TestesRealizados {
         return idempregado;
     }
 
-    public TestesRealizados setIdempregado(int idempregado) {
+    public TesteRealizado setIdempregado(int idempregado) {
         this.idempregado = idempregado;
         return this;
     }
 
-    public int getIdaviao() {
-        return idaviao;
+    public int getIdtest() {
+        return idtest;
     }
 
-    public TestesRealizados setIdaviao(int idaviao) {
-        this.idaviao = idaviao;
+    public TesteRealizado setIdtest(int idtest) {
+        this.idtest = idtest;
+        return this;
+    }
+
+    public Double getPontuacao_obtida() {
+        return pontuacao_obtida;
+    }
+
+    public TesteRealizado setPontuacao_obtida(Double pontuacao_obtida) {
+        this.pontuacao_obtida = pontuacao_obtida;
         return this;
     }
 
     @Override
     public String toString() {
-        return "TestesRealizados{" +
+        return "TesteRealizado{" +
                 "idtesterealizado=" + idtesterealizado +
                 ", data=" + data +
                 ", hrs_gastas=" + hrs_gastas +
                 ", idempregado=" + idempregado +
-                ", idaviao=" + idaviao +
+                ", idtest=" + idtest +
+                ", pontuacao_obtida=" + pontuacao_obtida +
                 '}';
     }
 }

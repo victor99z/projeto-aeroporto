@@ -1,22 +1,35 @@
-package com.udesc.aeroporto.entity;
+package com.udesc.aeroporto.model;
 
-import com.udesc.aeroporto.model.Empregado;
-
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-public class Tecnico extends Empregado {
-    private int idTecnico;
+@Entity
+@Table(name = "tecnico")
+public class Tecnico{
+    @Id
+    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idempregado;
+    @NotNull
+    @Column(name = "num_matricula")
     private int numMatricula;
+    @NotNull
+    private String nome;
+    @NotNull
     private String endereco;
+    @NotNull
+    @Column(name = "num_telefone")
     private String telefone;
+    @NotNull
     private BigDecimal salario;
 
-    public int getIdTecnico() {
-        return idTecnico;
+    public int getIdempregado() {
+        return idempregado;
     }
 
-    public Tecnico setIdTecnico(int idTecnico) {
-        this.idTecnico = idTecnico;
+    public Tecnico setIdempregado(int idempregado) {
+        this.idempregado = idempregado;
         return this;
     }
 
@@ -26,6 +39,15 @@ public class Tecnico extends Empregado {
 
     public Tecnico setNumMatricula(int numMatricula) {
         this.numMatricula = numMatricula;
+        return this;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public Tecnico setNome(String nome) {
+        this.nome = nome;
         return this;
     }
 
@@ -59,11 +81,12 @@ public class Tecnico extends Empregado {
     @Override
     public String toString() {
         return "Tecnico{" +
-                "idTecnico=" + idTecnico +
+                "idempregado=" + idempregado +
                 ", numMatricula=" + numMatricula +
+                ", nome='" + nome + '\'' +
                 ", endereco='" + endereco + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", salario=" + salario +
-                "} " + super.toString();
+                '}';
     }
 }

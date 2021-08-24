@@ -7,6 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public interface AviaoRepository extends JpaRepository<Aviao, Integer> {
+public interface AviaoRepository extends JpaRepository<Aviao, Integer>{
 
 }
