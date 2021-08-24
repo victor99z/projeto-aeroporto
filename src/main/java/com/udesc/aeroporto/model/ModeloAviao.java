@@ -1,10 +1,13 @@
 package com.udesc.aeroporto.model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "modeloaviao")
+@Document(collection = "modeloaviao")
 public class ModeloAviao{
     @NotNull
     @Id

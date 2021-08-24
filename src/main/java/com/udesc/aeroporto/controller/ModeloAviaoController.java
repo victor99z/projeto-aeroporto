@@ -17,6 +17,7 @@ public class ModeloAviaoController {
         this.modeloAviaoRepository = modeloAviaoRepository;
     }
 
+
     @GetMapping("/modelo")
     public String getAll(Model model){
         model.addAttribute("modeloAviao", new ModeloAviao());
