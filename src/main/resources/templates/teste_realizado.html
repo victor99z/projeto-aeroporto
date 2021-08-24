@@ -44,7 +44,7 @@
         <br>
         <div class="form-group">
             <label>Pontuação obtida</label>
-            <input type="text"  class="form-control" th:field="*{pontuacao_obtida}" required>
+            <input type="number" class="form-control" th:field="*{pontuacao_obtida}" required>
         </div>
         <br>
         <div class="form-group">
@@ -88,7 +88,7 @@
             <th scope="row" style="text-align: center" th:text="${teste.hrs_gastas}"></th>
             <th scope="row" style="text-align: center" th:text="${teste.pontuacao_obtida}"></th>
             <th scope="col" style="text-align: center">
-                <a type="submit" class="btn btn-danger" style="width: 100%;" th:href="@{'/teste/realizados/idtesterealizado?=' + ${teste.idtesterealizado}}">Excluir</a>
+                <a type="submit" class="btn btn-danger" style="width: 100%;" th:href="@{'/teste/realizados/delete?idtesterealizado=' + ${teste.idtesterealizado}}">Excluir</a>
             </th>
         </tr>
         </tbody>

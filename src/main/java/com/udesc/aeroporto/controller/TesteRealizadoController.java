@@ -1,8 +1,6 @@
 package com.udesc.aeroporto.controller;
 
-import com.udesc.aeroporto.model.Tecnico;
 import com.udesc.aeroporto.model.TesteRealizado;
-import com.udesc.aeroporto.repository.AviaoRepository;
 import com.udesc.aeroporto.repository.TecnicoReposity;
 import com.udesc.aeroporto.repository.TesteRealizadoRepository;
 import com.udesc.aeroporto.repository.TesteRepository;
@@ -41,13 +39,14 @@ public class TesteRealizadoController {
     @GetMapping("/teste/realizados/delete")
     public String delete(@RequestParam(name = "idtesterealizado", required = true) Integer idtesterealizado){
         testeRealizadoRepository.deleteById(idtesterealizado);
-        return "redirect:/teste/teste_realizado";
+        return "redirect:/teste/realizados";
     }
 
     @PostMapping("/teste/realizados/cadastro")
     public String cadastrar(@ModelAttribute("testerealizado") TesteRealizado testeRealizado){
+        System.out.println(testeRealizado);
         testeRealizadoRepository.save(testeRealizado);
-        return "redirect:/teste/teste_realizado";
+        return "redirect:/teste/realizados";
     }
 
 }
