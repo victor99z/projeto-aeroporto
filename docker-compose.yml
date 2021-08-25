@@ -9,34 +9,6 @@ services:
       - mongodb
     networks:
       - postgres-network
-  postgres:
-    image: postgres
-    environment:
-      POSTGRES_PASSWORD: root
-    ports:
-      - '5432:5432'
-    volumes:
-      - './.postgres:/var/lib/postgresql/data'
-    networks:
-      - postgres-network
-    container_name: postgresql-container
-    stdin_open: true
-    tty: true
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-      PGADMIN_LISTEN_PORT: 5052
-    ports:
-      - '5052:5052'
-    volumes:
-      - '${PATH_PGADMIN}:/var/lib/pgadmin'
-    depends_on:
-      - postgres
-    networks:
-      - postgres-network
-    container_name: pgadmin-container
   mongodb:
     image: mongo
     container_name: mongodb

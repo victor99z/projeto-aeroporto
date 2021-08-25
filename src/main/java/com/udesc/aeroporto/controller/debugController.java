@@ -1,31 +1,33 @@
 package com.udesc.aeroporto.controller;
 
-import com.udesc.aeroporto.model.Funcionario;
-import com.udesc.aeroporto.repository.FuncionarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.udesc.aeroporto.model.Aviao;
+import com.udesc.aeroporto.model.Modelo;
+import com.udesc.aeroporto.service.AviaoService;
+import com.udesc.aeroporto.service.ModeloService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.math.BigDecimal;
+
+import javax.websocket.server.PathParam;
 import java.util.List;
 
-
-@RestController
+@RestController()
 public class debugController {
+    AviaoService aviaoService;
+    ModeloService modeloService;
 
-    private FuncionarioRepository funcionarioRepository;
-
-    @Autowired
-    public debugController(FuncionarioRepository funcionarioRepository) {
-        this.funcionarioRepository = funcionarioRepository;
+    public debugController(AviaoService aviaoService, ModeloService modeloService) {
+        this.aviaoService = aviaoService;
+        this.modeloService = modeloService;
     }
 
-    @GetMapping("/debug/")
-    public String cadadastra(){
-        return funcionarioRepository.save(new Funcionario().setIdade(35).setSalario(new BigDecimal(35010000)).setNome("Joelson")).getCodigo();
+    @GetMapping("v1/aviao")
+    public List<Aviao> getAllaviao(){
+        return aviaoService.findAll();
     }
 
-    @GetMapping("/debug")
-    public List<Funcionario> retorna(){
-        return funcionarioRepository.findAll();
+    @GetMapping("v1/modelos")
+    public List<Modelo> getAllmodelo(){
+        return modeloService.findAll();
     }
+
 }

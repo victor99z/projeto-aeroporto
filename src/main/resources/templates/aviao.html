@@ -19,7 +19,7 @@
                 <a class="nav-link" href="/teste">Testes</a>
                 <a class="nav-link" href="/teste/realizados">Testes Realizados</a>
                 <a class="nav-link" href="/aviao">Aviões</a>
-                <a class="nav-link" href="/aviao/modelo">Modelos</a>
+                <a class="nav-link" href="/modelo">Modelos</a>
             </div>
         </div>
     </div>
@@ -29,8 +29,14 @@
         <h1>Cadastro de Aviões</h1>
         <br>
         <div class="form-group">
-            <select class="form-select" aria-label="Default select example" th:field="*{codmodelo}">
-                <option th:each="modelo : ${modelos}" th:text="${modelo.codmodelo}" th:value="${modelo.codmodelo}"></option>
+            <label>Num registro</label>
+            <input type="text" class="form-control" th:field="*{num_registro}" required>
+        </div>
+        <br>
+        <div class="form-group">
+            <label> Modelo </label>
+            <select class="form-select" aria-label="Default select example" th:field="*{modelo.id}">
+                <option th:each="modelo : ${modelos}" th:text="${modelo.codigo_modelo}" th:value="${modelo.id}"></option>
             </select>
         </div>
         <br>
@@ -44,20 +50,22 @@
     <table class="table table-bordered table-striped table-hover" style="width: 40em; margin-top: 5em; margin-bottom: 5em">
         <thead>
         <tr>
-            <th scope="col" colspan="4" style="text-align: center">Listam de modelos</th>
+            <th scope="col" colspan="5" style="text-align: center">Listam de modelos</th>
         </tr>
         <tr>
-            <th scope="col" style="text-align: center">id</th>
-            <th scope="col" style="text-align: center">codigo modelo</th>
+            <th scope="col" style="text-align: center">ID</th>
+            <th scope="col" style="text-align: center">Num. Registro</th>
+            <th scope="col" style="text-align: center">Num. Modelo</th>
             <th scope="col" style="text-align: center">Excluir</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="aviao : ${avioes}">
+            <td style="text-align: center" th:text="${aviao.id}"></td>
             <th scope="row" style="text-align: center" th:text="${aviao.num_registro}"></th>
-            <td style="text-align: center" th:text="${aviao.codmodelo}"></td>
+            <th scope="row" style="text-align: center" th:text="${aviao.modelo} ? ${aviao.modelo.codigo_modelo} : 'Sem modelo'"></th>
             <th scope="col" style="text-align: center">
-                <a type="submit" class="btn btn-danger" style="width: 100%;" th:href="@{'/aviao/delete?num_registro=' + ${aviao.num_registro}}">Excluir</a>
+                <a type="submit" class="btn btn-danger" style="width: 100%;" th:href="@{'/aviao/delete?id=' + ${aviao.id}}">Excluir</a>
             </th>
         </tr>
         </tbody>
