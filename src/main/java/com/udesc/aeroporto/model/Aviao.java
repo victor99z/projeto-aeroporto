@@ -1,7 +1,6 @@
 package com.udesc.aeroporto.model;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -9,7 +8,6 @@ public class Aviao {
     @Id
     private String id;
     private String num_registro;
-    @DBRef
     private Modelo modelo;
 
     public String getId() {

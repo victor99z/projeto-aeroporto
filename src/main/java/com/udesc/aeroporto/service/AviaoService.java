@@ -26,7 +26,7 @@ public class AviaoService {
     }
 
     public Aviao cria(Aviao aviao){
-        var modelo = modeloRepository.findById("61263f5ffdad745d270d4934").orElseThrow(() -> new IllegalArgumentException("ID não encontrado"));
+        var modelo = modeloRepository.findById(aviao.getModelo().getId()).orElseThrow(() -> new IllegalArgumentException("ID não encontrado"));
         aviao.setModelo(modelo);
         return this.aviaoRepository.save(aviao);
     }

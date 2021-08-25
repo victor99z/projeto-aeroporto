@@ -17,6 +17,11 @@ public class AviaoController {
         this.modeloService = modeloService;
     }
 
+    @GetMapping("/")
+    public String redirect(){
+        return "redirect:/aviao";
+    }
+
     @GetMapping("/aviao")
     public String getAll(Model model){
         model.addAttribute("avioes",this.aviaoService.findAll());
@@ -33,11 +38,7 @@ public class AviaoController {
     }
 
     @GetMapping("/aviao/delete")
-    public String delete(
-            @RequestParam(name = "id")
-                    String id
-    ){
-
+    public String delete(@RequestParam(name = "id") String id){
         aviaoService.delete(id);
         return "redirect:/aviao";
     }
