@@ -4,41 +4,35 @@
     <meta charset="UTF-8">
     <title>Testes realizados</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script
+            type="application/javascript"
+            th:src="@{js/jquery.js}"
+    ></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid" th:width="60em">
-        <a class="navbar-brand" href="#">Aeroporto</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                <a class="nav-link" href="/tecnico">Tecnico</a>
-                <a class="nav-link" href="/teste">Testes</a>
-                <a class="nav-link" href="/teste/realizados">Testes Realizados</a>
-                <a class="nav-link" href="/aviao">Aviões</a>
-                <a class="nav-link" href="/aviao/modelo">Modelos</a>
-            </div>
-        </div>
-    </div>
-</nav>
+<script type="application/javascript" th:inline="javascript">
+
+    $( window ).load(function() {
+        console.log("foo");
+    });
+
+</script>
+<div th:insert="Navbar"></div>
 <div class="container d-flex justify-content-center" style="width: 40em; margin-top: 5em;">
-    <form action="#" th:action="@{/teste/realizados/cadastro}" method="post" th:object="${testesrealizado}">
+    <form action="#" th:action="@{/teste/realizado/cadastro}" method="post" th:object="${testeRealizado}">
         <h1>Cadastro de testes realizados</h1>
         <br>
-        <label>Tecnico</label>
-        <div class="form-group">
-            <select class="form-select" aria-label="Default select example" th:field="*{idempregado}">
-                <option th:each="tecnico : ${tecnicos}" th:text="${tecnico.nome}" th:value="${tecnico.idempregado}"></option>
+        <label th:id="target">Tecnico: </label>
+        <div class="form-group" >
+            <select class="form-select" aria-label="Default select example" th:field="*{empregado.id}">
+                <option th:each="tecnico : ${tecnicos}" th:text="${tecnico.nome}" th:value="${tecnico.id}"></option>
             </select>
         </div>
         <br>
         <label>Teste</label>
         <div class="form-group">
-            <select class="form-select" aria-label="Default select example" th:field="*{idtest}">
-                <option th:each="teste : ${testes}" th:text="${teste.nome}" th:value="${teste.nroa}"></option>
+            <select class="form-select" aria-label="Default select example" th:field="*{teste}">
+                <option th:each="teste : ${testes}" th:text="${teste.nome}" th:value="${teste.id}"></option>
             </select>
         </div>
         <br>
@@ -49,12 +43,12 @@
         <br>
         <div class="form-group">
             <label>Horas gastas</label>
-            <input type="text"  class="form-control" th:field="*{hrs_gastas}" required>
+            <input type="text"  class="form-control" id="data" th:field="*{horas_gastas}" required>
         </div>
         <br>
         <div class="form-group">
             <label>Data</label>
-            <input type="date" class="form-control" th:field="*{data}" required>
+            <input type="date" id="form_hora" class="form-control" required th:field="*{data}">
         </div>
         <br>
         <div class="form-group">
@@ -67,33 +61,31 @@
     <table class="table table-bordered table-striped table-hover" style="width: 40em; margin-top: 5em; margin-bottom: 5em">
         <thead>
         <tr>
-            <th scope="col" colspan="6" style="text-align: center">Lista de testes realizados</th>
+            <th scope="col" colspan="7" style="text-align: center">Lista de testes realizados</th>
         </tr>
         <tr>
-            <th scope="col" style="text-align: center">id</th>
-            <th scope="col" style="text-align: center">id test</th>
-            <th scope="col" style="text-align: center">id empregado</th>
-            <th scope="col" style="text-align: center">data</th>
-            <th scope="col" style="text-align: center">tempo gasto</th>
+            <th scope="col" style="text-align: center">horas gastas</th>
+            <th scope="col" style="text-align: center">nome do teste</th>
+            <th scope="col" style="text-align: center">pontuacao obtida</th>
             <th scope="col" style="text-align: center">pontuação</th>
+            <th scope="col" style="text-align: center">data</th>
             <th scope="col" style="text-align: center">Excluir</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="teste : ${testesrealizados}">
-            <th scope="row" style="text-align: center" th:text="${teste.idtesterealizado}"></th>
-            <th scope="row" style="text-align: center" th:text="${teste.idtest}"></th>
-            <th scope="row" style="text-align: center" th:text="${teste.idempregado}"></th>
-            <th scope="row" style="text-align: center" th:text="${teste.data}"></th>
-            <th scope="row" style="text-align: center" th:text="${teste.hrs_gastas}"></th>
+            <th scope="row" style="text-align: center" th:text="${teste.horas_gastas}"></th>
+            <th scope="row" style="text-align: center" th:text="${teste.teste.nome}"></th>
             <th scope="row" style="text-align: center" th:text="${teste.pontuacao_obtida}"></th>
+            <th scope="row" style="text-align: center" th:text="${teste.teste.pontuacao_max}"></th>
+            <th scope="row" style="text-align: center" th:text="${teste.data}"></th>
             <th scope="col" style="text-align: center">
-                <a type="submit" class="btn btn-danger" style="width: 100%;" th:href="@{'/teste/realizados/delete?idtesterealizado=' + ${teste.idtesterealizado}}">Excluir</a>
+                <a type="submit" class="btn btn-danger" style="width: 100%;" th:href="@{'/teste/realizado/delete?id=' + ${teste.id}}">Excluir</a>
             </th>
         </tr>
         </tbody>
     </table>
 </div>
-</body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
 </html>

@@ -7,9 +7,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Document
-public class Tecnico {
-    @Id
-    private String id;
+public class Tecnico extends Empregado{
+
     private String nome;
     private Integer matricula;
     private String endereco;
@@ -17,14 +16,6 @@ public class Tecnico {
     private BigDecimal salario;
     private List<Aviao> avioes;
 
-    public String getId() {
-        return id;
-    }
-
-    public Tecnico setId(String id) {
-        this.id = id;
-        return this;
-    }
 
     public String getNome() {
         return nome;
@@ -83,13 +74,12 @@ public class Tecnico {
     @Override
     public String toString() {
         return "Tecnico{" +
-                "id='" + id + '\'' +
-                ", nome='" + nome + '\'' +
+                "nome='" + nome + '\'' +
                 ", matricula=" + matricula +
                 ", endereco='" + endereco + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", salario=" + salario +
                 ", avioes=" + avioes +
-                '}';
+                "} " + super.toString();
     }
 }
